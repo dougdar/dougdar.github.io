@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Douglas G. Darby, PhD - Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #fdfcf8;
+            --accent: #c4483e;
+            --muted: #8b7355;
+            --border: #d4c4b0;
+            --highlight: #f4ede4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 3px solid var(--ink);
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            background: linear-gradient(to bottom, var(--paper), var(--highlight));
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .title-line {
+            font-size: 1.1rem;
+            color: var(--muted);
+            font-style: italic;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .contact-info {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            animation: fadeInRight 0.8s ease-out 0.6s backwards;
+        }
+
+        .contact-info a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--ink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--paper);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: translateX(-50%);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.2s; }
+        section:nth-child(2) { animation-delay: 0.4s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+        section:nth-child(4) { animation-delay: 0.8s; }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        /* Research Grid */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .research-card {
+            border: 2px solid var(--border);
+            padding: 2rem;
+            background: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: var(--accent);
+        }
+
+        .research-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--highlight);
+            color: var(--muted);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        /* Teaching */
+        .course-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .course-item {
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            background: var(--highlight);
+            transition: all 0.3s;
+        }
+
+        .course-item:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(10px);
+        }
+
+        .course-code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Publications */
+        .publication {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .publication:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-authors {
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        /* Expertise Areas */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .expertise-item {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .expertise-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .expertise-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .expertise-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: var(--paper);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info {
+                border-left: none;
+                border-top: 3px solid var(--accent);
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+
+            nav a {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>Douglas G. Darby, PhD</h1>
+                <div class="subtitle">Immersive Media Researcher | Emergent Media Scholar | Experiential Media and Interaction Designer</div>
+                <div class="title-line">Academic Portfolio</div>
+            </div>
+            <div class="contact-info">
+                <a href="mailto:dougdar@gmail.com">dougdar@gmail.com</a>
+                <a href="tel:+12146204896">(214) 620-4896</a>
+                <div style="margin-top: 1rem; color: var(--muted);">
+                    <div>Lubbock Christian University</div>
+                    <div>College of Business</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Academic Profile</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                As a scholar-practitioner with over two decades of experience in emergent media, I explore how immersive learning environments, Extended Reality technologies, game-based learning strategies, and artificial intelligence can transform educational experiences and creative practice. My PhD in Learning Technologies from the University of North Texas, combined with experience at institutions including Microsoft, ACU, and SMU Guildhall, positions me to bridge creative practice with pedagogical theory in emergent media education.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                Currently serving as Chair of the Department of Integrated Business Technologies, Communication, and Marketing at Lubbock Christian University, I have built and led innovative programs in Digital Media Applications, Information Systems & Technology, and Game Design. I developed LCU's Varsity Esports Program and now serve as its Executive Director, integrating competitive gaming with academic learning and professional development. My research agenda explores the convergence of immersive technologies, artificial intelligence applications in education, and experiential learning—directly addressing questions central to the future of animation, game design, and emergent media pedagogy.
+            </p>
+        </section>
+
+        <section id="research">
+            <h2>Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3>Metaversity & Immersive XR Education</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="tag">Virtual Reality</span>
+                        <span class="tag">Extended Reality</span>
+                        <span class="tag">Metaverse</span>
+                    </div>
+                    <p>Leading multi-institutional research on immersive Extended Reality and the "Metaversity" concept for online higher education. Published work examining VR engagement in synchronous learning (Best Paper Award, Academy of Business Research 2024; Best in Track, Southwest Academy of Management 2025). IRB-approved studies exploring XR environments using Unity, Massive Loop, and Microsoft HoloLens for academic applications.</p>
+                </div>
+
+                <div class="research-card">
+                    <h3>AI-Driven Knowledge Systems & Human-AI Collaboration</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="tag">Artificial Intelligence</span>
+                        <span class="tag">Generative AI</span>
+                        <span class="tag">AI Ethics</span>
+                    </div>
+                    <p>Developing "The Persona AI Model"—a theoretical framework for AI consciousness, tacit knowledge representation, and collaborative human-AI partnerships (EquipLCU Research Grant recipient). Active research on ethical perceptions of generative AI in faith-based higher education and frameworks for AI literacy education. Multiple papers in preparation examining AI decision support systems and ethical human-AI engagement.</p>
+                </div>
+
+                <div class="research-card">
+                    <h3>Game-Based Learning & Interactive Media Design</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="tag">Game Design</span>
+                        <span class="tag">Experiential Learning</span>
+                        <span class="tag">Digital Media</span>
+                    </div>
+                    <p>Extensive background in game design pedagogy and interactive media production, including curriculum development for game design programs and research on experiential learning strategies in IST education. Prior work includes transmedia game design for educational contexts (published in Journal of Interactive Learning Research) and practical game development instruction using industry-standard tools and workflows.</p>
+                </div>
+
+                <div class="research-card">
+                    <h3>Online Learning Innovation & Learner Typologies</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="tag">Educational Technology</span>
+                        <span class="tag">Online Pedagogy</span>
+                        <span class="tag">Assessment</span>
+                    </div>
+                    <p>Dissertation research developed a Taxonomy of Online Learner Types (TOLT) informed by game-based engagement frameworks. Manuscript under review with Educational Technology Research and Development explores empirical validation of online learner typologies. Published work addresses sudden shifts to online learning and pedagogical innovations for digital engagement. Research on "Bridged Assessments" aligning academic work with industry expectations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="teaching">
+            <h2>Teaching Experience</h2>
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-code">DMA 3331 / 4352</div>
+                    <h3>Game Design & Digital Game Production</h3>
+                    <p>Comprehensive game development curriculum covering concept development, level design, game mechanics, and production pipelines. Students work in teams to create complete game projects using industry-standard tools and agile methodologies.</p>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-code">DMA 3352 / IST 3352</div>
+                    <h3>Developing and Managing Experiences in Immersive Worlds</h3>
+                    <p>Pioneering course exploring virtual reality, augmented reality, and immersive environment design. Students create XR applications and learn principles of spatial interaction design, presence theory, and immersive storytelling.</p>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-code">IST 4352</div>
+                    <h3>Trends & Challenges in Disruptive Innovations</h3>
+                    <p>Advanced seminar examining emerging technologies including AI, blockchain, IoT, XR, and their societal implications. Focus on ethical considerations, innovation theory, and critical evaluation of technological disruption in business and society.</p>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-code">DMA 4320</div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design principles, interaction design patterns, information architecture, and usability testing for digital products. Emphasis on design thinking methodologies and creating accessible, human-centered interfaces.</p>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-code">DMA 3311 / 2343</div>
+                    <h3>Digital Video & Motion Graphics</h3>
+                    <p>Production techniques in digital video editing, motion graphics, and multimedia content creation using Adobe Creative Suite and industry workflows. Project-based learning with emphasis on storytelling and professional production values.</p>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-code">IST 4380</div>
+                    <h3>Systems Analysis & Design</h3>
+                    <p>Comprehensive introduction to information systems development, requirements gathering, system architecture design, and project management for technology solutions.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 2.5rem; padding: 2rem; background: var(--highlight); border-left: 4px solid var(--accent);">
+                <h3 style="color: var(--ink); margin-bottom: 1rem;">Program Leadership & Curriculum Development</h3>
+                <p><strong>Program Coordinator</strong> for multiple degree programs including Digital Media Applications (B.A.), Web Design (B.S.), Information Systems & Technology (B.S.), and Management Information Systems (B.B.A.). Led comprehensive program redesign initiatives, developed innovative minors (Game Design, Data Analytics, Applied Computing, Cybersecurity), and created entirely new courses bridging creative media and information technology.</p>
+                <p style="margin-top: 1rem;"><strong>Esports Program Leadership:</strong> Served as LCU Esports Program Coordinator and Interim Head Coach for Varsity Esports, developing competitive gaming programs and managing student-athletes.</p>
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2>Selected Publications & Scholarship</h2>
+            
+            <div class="publication">
+                <div class="pub-title">Immersive Extended Reality, the Metaversity, and the Future of Online Higher Education</div>
+                <div class="pub-venue">In Press: Organizational Management Journal</div>
+                <div class="pub-authors">Kucinski, N., Burton, B., Darby, D., Hamm, S., Tanner, R. & McKell, C.</div>
+                <p style="margin-top: 0.5rem;">Research examining XR technologies and metaverse concepts for higher education. Winner of Best Paper Award at Academy of Business Research Conference (2024) and Best in Track Award at Southwest Academy of Management Conference (2025).</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">An Online Learner Typology Informed by Game-Based Engagement and Pedagogical Frameworks</div>
+                <div class="pub-venue">Under Review: Educational Technology Research and Development</div>
+                <div class="pub-authors">Darby, D. & Warren, S. J.</div>
+                <p style="margin-top: 0.5rem;">Empirical validation of the Taxonomy of Online Learner Types (TOLT) framework, bridging game studies theory with online learning pedagogy.</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">The Persona Model: A Framework for Tacit Knowledge Reconstruction and Contextual AI Interaction</div>
+                <div class="pub-venue">In Preparation</div>
+                <div class="pub-authors">Darby, D. & Anderson, G.</div>
+                <p style="margin-top: 0.5rem;">Novel framework for AI-based knowledge constructs and human-computer interaction environments through the Persona Model. EquipLCU Research Grant recipient ($1,000).</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">Bridging the AI Literacy Gap: Developing Ethical and Effective AI Education</div>
+                <div class="pub-venue">In Preparation</div>
+                <div class="pub-authors">Darby, D. & Harris, D.</div>
+                <p style="margin-top: 0.5rem;">Pedagogical frameworks for developing critical AI literacy across undergraduate curricula, with emphasis on ethical implications and effective implementation strategies.</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">Ethical Perceptions and Impacts of Generative AI in Faith-Based Higher Education</div>
+                <div class="pub-venue">In Preparation (IRB Approved Exempt)</div>
+                <div class="pub-authors">Darby, D., Hudson, K., & Bates, L.</div>
+                <p style="margin-top: 0.5rem;">Examines how AI-generated content aligns with core institutional values in faith-based education and influences teaching strategies.</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">Eyewitnesses to the Suddenly Online Paradigm Shift in Education</div>
+                <div class="pub-venue">Journal of Literacy & Technology (2020), 21(3), 5-13</div>
+                <div class="pub-authors">Chandler, R. C., Burton, B. G., Wallace, J. D., & Darby, D. G.</div>
+                <p style="margin-top: 0.5rem;">Analysis of rapid transition to online learning during COVID-19 pandemic, offering insights for sustaining effective teaching in digital environments.</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">Transmedia Play to Teach Computer Literacy, Global Thinking, and Rudimentary Instructional Design</div>
+                <div class="pub-venue">Journal of Interactive Learning Research (2019), 30(4), 505–537</div>
+                <div class="pub-authors">Warren, S. J., Beck, D. E., Najmi, A., & Darby, D.</div>
+                <p style="margin-top: 0.5rem;">Instructors reflect on teaching with Broken Window transmedia game for educational contexts.</p>
+            </div>
+
+            <div class="publication">
+                <div class="pub-title">Differentiation: A Taxonomy of Online Learner Types in Higher Education</div>
+                <div class="pub-venue">Doctoral Dissertation, University of North Texas (2019)</div>
+                <div class="pub-authors">Darby, D.</div>
+                <p style="margin-top: 0.5rem;">Dissertation research developing TOLT framework by applying game player typologies to online learning contexts.</p>
+            </div>
+
+            <div style="margin-top: 2.5rem; padding: 2rem; background: var(--highlight); border-left: 4px solid var(--accent);">
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Funded Research Collaborations</h3>
+                <p><strong>NASA Space Science Education Consortium (2016-2017)</strong><br>
+                Research Collaborator, UNT Institute for the Integration of Technology into Teaching and Learning<br>
+                Contributed to research on instructional use of space science resources in immersive learning contexts<br>
+                <em>NASA Grant #NNX16AL63A</em></p>
+                
+                <p style="margin-top: 1rem;"><strong>American Innovations in 3-D in an Age of Discovery (2016-2017)</strong><br>
+                Research Collaborator, UNT Institute for the Integration of Technology into Teaching and Learning<br>
+                Supported exploration of 3D visualization technologies in educational design<br>
+                <em>NSF Grant #14-512</em></p>
+
+                <p style="margin-top: 1rem;"><strong>Intel Science and Technology Center for Visual Computing (2012-2015)</strong><br>
+                Research Collaborator, SMU Hart eCenter<br>
+                Participated in visual computing research and interactive media applications<br>
+                <em>Intel Grant: $50,000</em></p>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: var(--highlight);">
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Conference Presentations & Media Engagement</h3>
+                <p><strong>Recent Presentations:</strong> Southwest Academy of Management (2025), Association of Business Information Systems (2024, 2025), Academy of Business Research (2024), Decision Sciences Institute (2023)</p>
+                <p style="margin-top: 0.5rem;"><strong>Invited Speaking:</strong> UNT Learning Technologies Doctoral Meeting Keynote (2024), LCU Faculty Development workshops on AI Policy and Online Learning</p>
+                <p style="margin-top: 0.5rem;"><strong>Media:</strong> KCBD News subject matter expert interview on generative AI in education (2023)</p>
+            </div>
+        </section>
+
+        <section id="expertise">
+            <h2>Areas of Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <div class="expertise-icon">🌐</div>
+                    <div class="expertise-title">Immersive Learning Environments</div>
+                    <p>Virtual worlds, metaverse research, spatial learning design, synchronous engagement</p>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">🎮</div>
+                    <div class="expertise-title">Game-Based Learning</div>
+                    <p>Educational game design pedagogy, game mechanics for learning, experiential strategies</p>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">🤖</div>
+                    <div class="expertise-title">AI in Education</div>
+                    <p>Generative AI applications, AI ethics, AI literacy education, human-AI collaboration frameworks</p>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">🔬</div>
+                    <div class="expertise-title">Educational Technology Research</div>
+                    <p>Learning sciences, instructional design, online learner typologies, assessment innovation</p>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">🎨</div>
+                    <div class="expertise-title">Digital Media Pedagogy</div>
+                    <p>Video production, motion graphics, UI/UX design, interactive media curriculum</p>
+                </div>
+
+                <div class="expertise-item">
+                    <div class="expertise-icon">📚</div>
+                    <div class="expertise-title">Program Development & Leadership</div>
+                    <p>Curriculum architecture, faculty development, academic program innovation</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Research Vision & Impact</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem;">
+                My research agenda centers on understanding how emergent media technologies—particularly immersive XR environments, AI-driven systems, and game-based frameworks—can transform learning, creativity, and human interaction. This work is fundamentally interdisciplinary, drawing on learning sciences, game studies, human-computer interaction, and media theory to address both pedagogical questions and broader implications of technological innovation.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem;">
+                Through my metaversity research (recognized with multiple best paper awards), I investigate how persistent virtual environments and XR technologies create new possibilities for synchronous engagement, spatial learning, and embodied interaction. My work on the Persona AI Model explores theoretical frameworks for understanding AI consciousness and human-AI collaboration, while my research on learner typologies bridges game player theory with online education to better understand diverse learner needs and behaviors.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                Beyond scholarly publication, my research directly informs curriculum design and pedagogical practice. I have created entirely new courses in immersive worlds, game design, and disruptive technologies; developed innovative assessment strategies that bridge academic and professional contexts; and led faculty development initiatives on AI integration and online engagement. This scholar-practitioner approach ensures that theoretical insights translate into tangible improvements in how students learn, create, and prepare for careers in rapidly evolving media landscapes.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Douglas G. Darby, PhD | Academic Research Portfolio</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">Immersive Media Research | Emergent Media Scholarship | Experiential Design</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 80;
+                const targetPosition = target.offsetTop - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Parallax effect for header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.3}px)`;
+                header.style.opacity = 1 - (scrolled / 500);
+            }
+        });
+    </script>
+</body>
+</html>
